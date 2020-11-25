@@ -10,8 +10,8 @@ public class Configuration {
 
     @Config.LangKey("memorycleaner.config.min_interval")
     @Config.RangeInt(min = 30)
-    @Config.Comment("The minimum time, in seconds, between memory cleanings. Note that the actual cleaning interval is usually longer than this due to player activity. [default: 180]")
-    public static int minInterval = 180;
+    @Config.Comment("The minimum time, in seconds, between memory cleanings. Note that the actual cleaning interval is usually longer than this due to player activity. [default: 300]")
+    public static int minInterval = 300;
 
     @Config.LangKey("memorycleaner.config.max_interval")
     @Config.RangeInt(min = 60)

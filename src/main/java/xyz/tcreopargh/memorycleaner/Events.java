@@ -51,6 +51,8 @@ public final class Events {
                 }
                 if (player.motionX < 0.001 && player.motionY < 0.001 && player.motionZ < 0.001) {
                     idleTime++;
+                } else {
+                    idleTime = 0;
                 }
             }
         }
