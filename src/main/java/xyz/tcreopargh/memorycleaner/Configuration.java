@@ -20,8 +20,8 @@ public class Configuration {
 
     @Config.LangKey("memorycleaner.config.force_clean_percentage")
     @Config.RangeInt(min = 0, max = 100)
-    @Config.Comment("If your RAM usage goes above this percentage, memory cleaning will start regardless of player activity, but it still respects minInterval. Set to 100 to disable the feature or 0 to ignore player activity at any time. [default: 85]")
-    public static int forceCleanPercentage = 85;
+    @Config.Comment("If your RAM usage goes above this percentage, memory cleaning will start regardless of player activity, but it still respects minInterval. Set to 100 to disable the feature or 0 to ignore player activity at any time. [default: 80]")
+    public static int forceCleanPercentage = 80;
 
     @Config.LangKey("memorycleaner.config.min_idle_time")
     @Config.RangeInt(min = 5)
