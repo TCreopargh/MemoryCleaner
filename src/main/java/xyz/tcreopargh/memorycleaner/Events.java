@@ -34,25 +34,29 @@ public final class Events {
         if (event.phase == TickEvent.Phase.END && event.player != null && event.player.world.isRemote) {
             if (event.player.getUniqueID().equals(Minecraft.getMinecraft().player.getUniqueID())) {
                 boolean doClean = false;
-                if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.minInterval * 1000) {
+                if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.minInterval * 1000) {
                     if ((double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Runtime.getRuntime().totalMemory() > (double) Configuration.forceCleanPercentage / 100.0) {
                         doClean = true;
-                    } else if (idleTime > Configuration.minIdleTime * 20) {
-                        doClean = true;
+                    } else if (Configuration.AutomaticCleanup.autoCleanup) {
+                        if (idleTime > Configuration.AutomaticCleanup.minIdleTime * 20) {
+                            doClean = true;
+                        }
+                        if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.maxInterval * 1000) {
+                            doClean = true;
+                        }
                     }
-                    if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.maxInterval * 1000) {
-                        doClean = true;
+                    if (doClean) {
+                        cleanMemory(player);
+                        lastCleanTime = System.currentTimeMillis();
+                        idleTime = 0;
                     }
-                }
-                if (doClean) {
-                    cleanMemory(player);
-                    lastCleanTime = System.currentTimeMillis();
-                    idleTime = 0;
-                }
-                if (player.motionX < 0.001 && player.motionY < 0.001 && player.motionZ < 0.001) {
-                    idleTime++;
-                } else {
-                    idleTime = 0;
+                    if (Configuration.AutomaticCleanup.autoCleanup) {
+                        if (player.motionX < 0.001 && player.motionY < 0.001 && player.motionZ < 0.001) {
+                            idleTime++;
+                        } else {
+                            idleTime = 0;
+                        }
+                    }
                 }
             }
         }

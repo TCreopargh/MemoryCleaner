@@ -1,0 +1,10 @@
+memorycleaner.config.show_message=Показывать сообщение об очистке
+memorycleaner.config.min_interval=Минимальный интервал
+memorycleaner.config.max_interval=Максимальный интервал
+memorycleaner.config.force_clean_percentage=Минимальный объем потребляемой RAM для очистки
+memorycleaner.config.min_idle_time=Минимальное время простоя
+memorycleaner.config.clean_on_join=Очищать память при прогрузке мира
+memorycleaner.config.command_aliases=Алиасы команд
+memorycleaner.config.auto_cleanup=Включить автоматическую очистку
+memorycleaner.gc.start=§a[Очиститель памяти] §fНачинаю очищать память, может немного лагать!
+memorycleaner.gc.end=§a[Очиститель памяти] §fОчистка памяти завершена.
