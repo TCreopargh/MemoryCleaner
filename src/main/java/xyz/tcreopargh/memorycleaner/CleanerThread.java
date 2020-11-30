@@ -21,7 +21,8 @@ public class CleanerThread implements Runnable {
             Thread.sleep(1000L);
         } catch (InterruptedException ignored) {
         }
-        System.gc();if(Configuration.showMessage) {
+        System.gc();
+        if(Configuration.showMessage) {
             sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "memorycleaner.gc.end"));
         }
     }

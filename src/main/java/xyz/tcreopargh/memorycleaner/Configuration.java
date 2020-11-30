@@ -27,7 +27,7 @@ public class Configuration {
 
     public static class AutoCleanup {
         @Config.LangKey("memorycleaner.config.auto_cleanup")
-        @Config.Comment("Enable automatic time-based cleanup at all or not. [default: true]")
+        @Config.Comment("Enable automatic time-based cleanup at all or not. If set to false, all configurations below will do nothing. [default: true]")
         public boolean autoCleanup = true;
 
         @Config.LangKey("memorycleaner.config.min_interval")

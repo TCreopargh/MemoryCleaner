@@ -16,7 +16,7 @@ public class MemoryCleaner {
 
     public static final String MOD_ID = "memorycleaner";
     public static final String MOD_NAME = "Memory Cleaner";
-    public static final String VERSION = "1.1";
+    public static final String VERSION = "1.2";
 
     @Mod.Instance(MOD_ID)
     public static MemoryCleaner INSTANCE;

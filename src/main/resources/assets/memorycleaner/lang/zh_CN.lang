@@ -5,5 +5,6 @@ memorycleaner.config.force_clean_percentage=强制清理时内存占用百分比
 memorycleaner.config.min_idle_time=清理时玩家的挂机时间（秒）
 memorycleaner.config.clean_on_join=是否在进入世界时清理
 memorycleaner.config.command_aliases=清理指令别名
+memorycleaner.config.auto_cleanup=启用自动内存清理
 memorycleaner.gc.start=§a[内存清理] §f正在清理内存，可能会导致卡顿！
 memorycleaner.gc.end=§a[内存清理] §f内存清理完成！
