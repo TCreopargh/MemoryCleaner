@@ -18,11 +18,16 @@ public class Configuration {
     @Config.Comment("Whether to clean memory immediately when joining a world. This disrespects minInterval. If this is set to false, a minimum time of minInterval has to pass before the memory can be cleaned for the first time. [default: true]")
     public static boolean cleanOnJoin = true;
 
+    @Config.LangKey("memorycleaner.config.clean_on_init")
+    @Config.Comment("Whether to clean memory at important stages when Minecraft is initializing. [default: true]")
+    public static boolean cleanOnInit = true;
+
     @Config.LangKey("memorycleaner.config.force_clean_percentage")
     @Config.RangeInt(min = 0, max = 100)
     @Config.Comment("If your RAM usage goes above this percentage, memory cleaning will start regardless of player activity, but it still respects minInterval. Set to 100 to disable the feature or 0 to ignore player activity at any time. [default: 80]")
     public static int forceCleanPercentage = 80;
 
+    @Config.LangKey("memorycleaner.config.auto_cleanup_tab")
     public static AutoCleanup AutomaticCleanup = new AutoCleanup();
 
     public static class AutoCleanup {
@@ -37,7 +42,7 @@ public class Configuration {
 
         @Config.LangKey("memorycleaner.config.max_interval")
         @Config.RangeInt(min = 60)
-        @Config.Comment("The maximum time, in seconds, between memory cleanings. If this amount of time is passed since the last cleaning, a forced memory cleaning will start regardless of player activity. Set to a very large number to effectively disable forced cleaning triggered by this. DO NOT SET THIS LESSER THAN minInterval! [default: 1200]")
+        @Config.Comment("The maximum time, in seconds, between memory cleanings. If this amount of time is passed since the last cleaning, a forced memory cleaning will start regardless of player activity. Set to a very large number to effectively disable forced cleaning triggered by this. DO NOT SET THIS LESS THAN minInterval! [default: 1200]")
         public int maxInterval = 1200;
 
         @Config.LangKey("memorycleaner.config.min_idle_time")

@@ -6,5 +6,7 @@ memorycleaner.config.min_idle_time=Минимальное время прост�
 memorycleaner.config.clean_on_join=Очищать память при прогрузке мира
 memorycleaner.config.command_aliases=Алиасы команд
 memorycleaner.config.auto_cleanup=Включить автоматическую очистку
+memorycleaner.config.clean_on_init=Очистить память при запуске игры
+memorycleaner.config.auto_cleanup_tab=Автоматическую очистку
 memorycleaner.gc.start=§a[Очиститель памяти] §fНачинаю очищать память, может немного лагать!
 memorycleaner.gc.end=§a[Очиститель памяти] §fОчистка памяти завершена.

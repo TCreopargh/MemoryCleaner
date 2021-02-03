@@ -1,6 +1,7 @@
 package xyz.tcreopargh.memorycleaner;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
@@ -27,35 +28,34 @@ public final class Events {
 
     public static int idleTime = 0;
 
+
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        EntityPlayer player = event.player;
-        if (event.phase == TickEvent.Phase.END && event.player != null && event.player.world.isRemote) {
-            if (event.player.getUniqueID().equals(Minecraft.getMinecraft().player.getUniqueID())) {
-                boolean doClean = false;
-                if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.minInterval * 1000) {
-                    if ((double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Runtime.getRuntime().totalMemory() > (double) Configuration.forceCleanPercentage / 100.0) {
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        EntityPlayerSP player = Minecraft.getMinecraft().player;
+        if (event.phase == TickEvent.Phase.END && player != null && player.world.isRemote) {
+            boolean doClean = false;
+            if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.minInterval * 1000) {
+                if ((double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Runtime.getRuntime().totalMemory() > (double) Configuration.forceCleanPercentage / 100.0) {
+                    doClean = true;
+                } else if (Configuration.AutomaticCleanup.autoCleanup) {
+                    if (idleTime > Configuration.AutomaticCleanup.minIdleTime * 20) {
                         doClean = true;
-                    } else if (Configuration.AutomaticCleanup.autoCleanup) {
-                        if (idleTime > Configuration.AutomaticCleanup.minIdleTime * 20) {
-                            doClean = true;
-                        }
-                        if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.maxInterval * 1000) {
-                            doClean = true;
-                        }
                     }
-                    if (doClean) {
-                        cleanMemory(player);
-                        lastCleanTime = System.currentTimeMillis();
+                    if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.maxInterval * 1000) {
+                        doClean = true;
+                    }
+                }
+                if (doClean) {
+                    cleanMemory(player);
+                    lastCleanTime = System.currentTimeMillis();
+                    idleTime = 0;
+                }
+                if (Configuration.AutomaticCleanup.autoCleanup) {
+                    if (player.motionX < 0.001 && player.motionY < 0.001 && player.motionZ < 0.001) {
+                        idleTime++;
+                    } else {
                         idleTime = 0;
-                    }
-                    if (Configuration.AutomaticCleanup.autoCleanup) {
-                        if (player.motionX < 0.001 && player.motionY < 0.001 && player.motionZ < 0.001) {
-                            idleTime++;
-                        } else {
-                            idleTime = 0;
-                        }
                     }
                 }
             }

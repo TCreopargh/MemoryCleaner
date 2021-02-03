@@ -10,4 +10,11 @@ public class MemoryManager {
         gcThread.setDaemon(true);
         gcThread.start();
     }
+
+    public static void cleanMemory() {
+        Runnable runnable = new CleanerThread();
+        Thread gcThread = new Thread(runnable, "MemoryCleaner GC Thread");
+        gcThread.setDaemon(true);
+        gcThread.start();
+    }
 }

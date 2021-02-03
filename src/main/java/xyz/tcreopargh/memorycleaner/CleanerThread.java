@@ -5,15 +5,20 @@ import net.minecraftforge.server.command.TextComponentHelper;
 
 public class CleanerThread implements Runnable {
 
-    private final ICommandSender sender;
+    private ICommandSender sender = null;
 
-    CleanerThread(ICommandSender sender) {
+    public CleanerThread(ICommandSender sender) {
         this.sender = sender;
+    }
+
+    public CleanerThread() {
+
     }
 
     @Override
     public void run() {
-        if(Configuration.showMessage) {
+        MemoryCleaner.logger.info("Memory cleaner thread started!");
+        if (sender != null && Configuration.showMessage) {
             sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "memorycleaner.gc.start"));
         }
         System.gc();
@@ -22,8 +27,9 @@ public class CleanerThread implements Runnable {
         } catch (InterruptedException ignored) {
         }
         System.gc();
-        if(Configuration.showMessage) {
+        if (sender != null && Configuration.showMessage) {
             sender.sendMessage(TextComponentHelper.createComponentTranslation(sender, "memorycleaner.gc.end"));
         }
+        MemoryCleaner.logger.info("Memory cleaner thread finished!");
     }
 }
