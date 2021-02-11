@@ -33,7 +33,7 @@ public final class Events {
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         EntityPlayerSP player = Minecraft.getMinecraft().player;
-        if (event.phase == TickEvent.Phase.END && player != null && player.world.isRemote) {
+        if (!Minecraft.getMinecraft().isGamePaused() && event.phase == TickEvent.Phase.END && player != null && player.world.isRemote) {
             boolean doClean = false;
             if ((System.currentTimeMillis() - lastCleanTime) > (long) Configuration.AutomaticCleanup.minInterval * 1000) {
                 if ((double) (Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Runtime.getRuntime().totalMemory() > (double) Configuration.forceCleanPercentage / 100.0) {

@@ -20,7 +20,7 @@ public class MemoryCleaner {
 
     public static final String MOD_ID = "memorycleaner";
     public static final String MOD_NAME = "Memory Cleaner";
-    public static final String VERSION = "1.3";
+    public static final String VERSION = "1.4";
     public static final String CLIENT_PROXY = "xyz.tcreopargh.memorycleaner.ClientProxy";
     public static final String COMMON_PROXY = "xyz.tcreopargh.memorycleaner.CommonProxy";
     @Mod.Instance(MOD_ID)
